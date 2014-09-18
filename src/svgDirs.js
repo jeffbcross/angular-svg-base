@@ -38,12 +38,14 @@
               restrict: 'A',
               link: function(scope, element, attrs) {
                 var initialUrl;
+
                 //Only apply to svg elements to avoid unnecessary observing
                 //Check that is in html5Mode and that history is supported
                 if ((!svgAttrExpressions.SVG_ELEMENT.test(element[0] &&
                     element[0].toString())) ||
                   !$location.$$html5 ||
                   !$sniffer.history) return;
+
                 //Assumes no expressions, since svg is unforgiving of xml violations
                 initialUrl = attrs[attr];
                 attrs.$observe(attr, updateValue);
