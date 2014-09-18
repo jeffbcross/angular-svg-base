@@ -1,7 +1,29 @@
 
 # angular-svg-base
 
+This is a set of auto directives to fix SVG attributes that reference fragments
+within the same document via FuncIRI notation (`mask="url(#someFragment)"`) where a base tag is
+present. Blink and gecko incorrectly apply these references to the `base href`.
+
 See AngularJS issue [#8934](https://github.com/angular/angular.js/issues/8934).
+
+## Installation
+
+`$ bower install angular-svg-base`
+
+## Usage
+
+Just add the module as a dependency and it rewrites all `#fragment` urls to be
+absolute urls relative to the current document, regardless of base.
+
+(Note: directives only apply in html5 mode, as everything works as expected otherwise).
+
+```javascript
+angular.module('myApp', ['ngSVGAttributes']).
+  config(function($locationProvider) {
+    $locationProvider.html5Mode(true);
+  });
+```
 
 ## Development
 
