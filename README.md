@@ -13,9 +13,9 @@ See AngularJS issue [#8934](https://github.com/angular/angular.js/issues/8934).
 Unit Tests: `./node_modules/.bin/karma start`
 
 E2E (from project root directory):
+
+Installs npm and webdriver dependencies, then starts server and runs e2e tests.
 ```shell
-$ ./node_modules/.bin/http-server
-$ ./node_modules/.bin/webdriver-manager start
-$ ./node_modules/.bin/protractor protractor.conf.js
+$ ./e2etest.sh
 ```
 
