@@ -1,0 +1,32 @@
+<!doctype html>
+<html ng-app="e2eApp">
+  <head>
+    <title>SVG E2E Test App</title>
+    <script src="../../bower_components/angular/angular.js"></script>
+    <script src="../../src/svgDirs.js"></script>
+    <script src="app.js"></script>
+    <base href="/test/e2e/subpath">
+  </head>
+  <body style="margin:0;padding:0">
+    <svg width="80px" height="30px" viewBox="0 0 80 30"
+       xmlns="http://www.w3.org/2000/svg">
+
+    <defs>
+      <clipPath id="myClip">
+          <rect x="10" y="10" width="30" height="10" />
+      </clipPath>
+    </defs>
+
+    <!--This element should get its right half clipped. Protractor verifies this by counting clicks, then clicking the exposed region and unexposed regions.-->
+    <rect id="clipped"
+          x="10"
+          y="10"
+          width="60"
+          height="10"
+          fill="#000000"
+          clip-path="url(#myClip)"
+          ng-click="clicked = clicked + 1"  />
+    <span ng-bind="clicked"></span>
+  </svg>
+  </body>
+</html>

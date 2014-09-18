@@ -1,0 +1,31 @@
+{
+  "name": "angular-svg-base",
+  "version": "0.0.0",
+  "description": "See AngularJS issue [#8934](https://github.com/angular/angular.js/issues/8934).",
+  "main": "src/svgDirs.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "karma start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jeffbcross/angular-svg-base"
+  },
+  "keywords": [
+    "angularjs",
+    "svg",
+    "base"
+  ],
+  "author": "jeffbcross",
+  "license": "Apache 2",
+  "bugs": {
+    "url": "https://github.com/jeffbcross/angular-svg-base/issues"
+  },
+  "homepage": "https://github.com/jeffbcross/angular-svg-base",
+  "devDependencies": {
+    "protractor": "~1.2.0",
+    "karma": "~0.12.23"
+  }
+}
