@@ -13,6 +13,7 @@ describe('svgAttrs', function() {
 
     it('should do nothing if no url()', inject(function($compile, $rootScope) {
       var element = $compile('<svg><ellipse clip-path="#someNonUrl"></ellipse></svg>')($rootScope);
+      $rootScope.$digest();
       expect(element.children(0).attr('clip-path')).toBe('#someNonUrl');
     }));
 
