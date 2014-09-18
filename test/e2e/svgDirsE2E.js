@@ -25,7 +25,7 @@ describe('e2e tests', function() {
     expect(rect.getAttribute('clip-path')).toBe('url(http://localhost:8080/test/e2e/subpath#myClip)');
 
     //Click just to the left of the rectangle
-    moveToOffset(9, 30);
+    moveToOffset(9, 10);
     //Check that click counter did increment
     expect(counter.getText()).toBe('');
 
