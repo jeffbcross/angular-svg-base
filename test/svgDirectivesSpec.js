@@ -5,17 +5,10 @@ describe('svgAttrs', function() {
     var basePath, baseTag;
 
     beforeEach(function() {
-      // baseTag = document.createElement('base');
-      // baseTag.setAttribute('href', 'http://baseserver/basepath/');
-      // document.head.appendChild(baseTag);
       module('ngSVGAttributes', function($locationProvider) {
         $locationProvider.html5Mode(true);
       });
     });
-
-    afterEach(function() {
-      // document.head.removeChild(baseTag);
-    })
 
 
     it('should do nothing if no url()', inject(function($compile, $rootScope) {
@@ -44,7 +37,7 @@ describe('svgAttrs', function() {
         ].join('');
         var element = $compile(template)($rootScope);
         $rootScope.$digest();
-        expect(element.children(0).attr('clip-path')).toBe('url(http://baseserver/basepath/mypath#my-clip)');
+        expect(element.children(0).attr('clip-path')).toBe('url(http://server/mypath#my-clip)');
       });
     });
 
@@ -61,10 +54,10 @@ describe('svgAttrs', function() {
         element = $compile(template)($rootScope);
         $location.path('/mypath');
         $rootScope.$digest();
-        expect(element.children(0).attr('clip-path')).toBe('url(http://baseserver/mypath#my-clip)');
+        expect(element.children(0).attr('clip-path')).toBe('url(http://server/mypath#my-clip)');
         $location.path('/newpath');
         $rootScope.$digest();
-        expect(element.children(0).attr('clip-path')).toBe('url(http://baseserver/newpath#my-clip)');
+        expect(element.children(0).attr('clip-path')).toBe('url(http://server/newpath#my-clip)');
 
       });
     });
@@ -83,8 +76,6 @@ describe('svgAttrs', function() {
 
 
     it('should do nothing with urls of different origins also in html5Mode', function() {
-
-
       inject(function($compile, $rootScope, $location) {
         var element = $compile(
             '<svg><ellipse clip-path="url(http://google.com/logo.svg)"></ellipse></svg>')($rootScope);
