@@ -85,11 +85,9 @@
                   replace(svgAttrExpressions.HASH_PART, '') +
                   match[1];
               }
-              //Non-hash URLs in any mode
+              //Presumably links to external SVG document
               else {
-                var parsingNode = document.createElement('a');
-                parsingNode.setAttribute('href', match[1]);
-                fullUrl = parsingNode.href;
+                fullUrl = urlResolve(match[1]);
               }
             }
             return fullUrl ? 'url(' + fullUrl + ')' : null;
