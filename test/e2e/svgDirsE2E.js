@@ -2,17 +2,30 @@ var protractor = require('protractor')
     , tractor = protractor.getInstance();
 
 describe('e2e tests', function() {
+  beforeEach(function() {
+    browser.get('http://localhost:8080/test/e2e/index.html');
+  });
+
+
   it('should load the right index', function() {
     browser.get('http://localhost:8080/test/e2e/index.html');
     expect(browser.getTitle()).toBe('SVG E2E Test App');
   });
 
 
+  it('should have a base pointing to /test/e2e/subpath', function() {
+    expect(element(by.tagName('base')).getAttribute('href')).toBe('http://localhost:8080/test/e2e/subpath');
+  });
+
+
   it('should load the clip-path from the definition in the same document', function() {
     var counter = element(by.binding('clicked'));
+    var rect = element(by.id('clipped'));
+
+    expect(rect.getAttribute('clip-path')).toBe('url(http://localhost:8080/test/e2e/subpath#myClip)');
 
     //Click just to the left of the rectangle
-    moveToOffset(9, 10);
+    moveToOffset(9, 30);
     //Check that click counter did increment
     expect(counter.getText()).toBe('');
 
