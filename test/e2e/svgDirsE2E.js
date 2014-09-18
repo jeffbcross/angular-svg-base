@@ -22,7 +22,7 @@ describe('e2e tests', function() {
     var counter = element(by.binding('clicked'));
     var rect = element(by.id('clipped'));
 
-    expect(rect.getAttribute('clip-path')).toBe('url(http://localhost:8080/test/e2e/subpath#myClip)');
+    expect(rect.getAttribute('clip-path')).toBe('url(http://localhost:8080/test/e2e/index.html#myClip)');
 
     //Click just to the left of the rectangle
     moveToOffset(9, 10);
