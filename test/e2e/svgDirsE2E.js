@@ -8,7 +8,7 @@ describe('e2e tests', function() {
   });
 
 
-  it('should load the ellipse from the definition in the same document', function() {
+  it('should load the clip-path from the definition in the same document', function() {
     var counter = element(by.binding('clicked'));
 
     //Click just to the left of the rectangle
