@@ -42,6 +42,22 @@ describe('svgAttrs', function() {
     });
 
 
+    it('should work if there is another hash in absUrl()', function() {
+      inject(function($compile, $rootScope, $location) {
+        $location.path('/mypath');
+        $location.hash('someHash');
+        var template = [
+          '<svg>',
+            '<ellipse clip-path="url(#my-clip)"></ellipse>',
+          '</svg>'
+        ].join('');
+        var element = $compile(template)($rootScope);
+        $rootScope.$digest();
+        expect(element.children(0).attr('clip-path')).toBe('url(http://server/mypath#my-clip)');
+      });
+    });
+
+
     it('should update url on $locationChangeSuccess event in html5mode', function() {
       inject(function($compile, $rootScope, $location) {
         var element;
@@ -88,7 +104,6 @@ describe('svgAttrs', function() {
     it('should do nothing with absolute urls of the same origin (regardless of html5Mode)');
     //Is there ever a case where it would make sense for an app to serve from a different base url?
     // - Local debugging with remote data/assets
-    it('should work if there is another hash in absUrl()');
   });
 
   describe('non-html5Mode', function() {

@@ -57,7 +57,8 @@
     }]).
     value('svgAttrExpressions', {
       FUNC_URI: /^url\((.*)\)$/,
-      SVG_ELEMENT: /SVG[a-zA-Z]*Element/
+      SVG_ELEMENT: /SVG[a-zA-Z]*Element/,
+      HASH_PART: /#.*/
     }).
     factory('computeSVGAttrValue', [
                 '$location', 'svgAttrExpressions', 'urlResolve',
@@ -67,7 +68,9 @@
             if (match = svgAttrExpressions.FUNC_URI.exec(url)) {
               //hash in html5Mode, forces to be relative to current url instead of base
               if (match[1].indexOf('#') === 0 && $location.$$html5) {
-                fullUrl = $location.absUrl() + match[1];
+                fullUrl = $location.absUrl().
+                  replace(svgAttrExpressions.HASH_PART, '') +
+                  match[1];
               }
               //Non-hash URLs in any mode
               else {
