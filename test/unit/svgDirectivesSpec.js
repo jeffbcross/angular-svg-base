@@ -20,10 +20,10 @@ describe('svgAttrs', function() {
 
     it('should only apply to svg elements', inject(function($rootScope, $compile, urlResolve) {
       var basePath = urlResolve('resources').href;
-      var template = '<div><span clip-path="url(foo)"></span></div>';
+      var template = '<div><span clip-path="url(#foo)"></span></div>';
       var element = $compile(template)($rootScope);
       $rootScope.$digest();
-      expect(element.html()).toContain('url(foo)');
+      expect(element.html()).toContain('clip-path="url(#foo)"');
       expect(element.html()).not.toContain(basePath);
     }));
 
@@ -95,9 +95,9 @@ describe('svgAttrs', function() {
     it('should do nothing with urls of different origins also in html5Mode', function() {
       inject(function($compile, $rootScope, $location) {
         var element = $compile(
-            '<svg><ellipse clip-path="url(http://google.com/logo.svg)"></ellipse></svg>')($rootScope);
+            '<svg><ellipse clip-path="url(http://google.com/logo.svg#clipPath)"></ellipse></svg>')($rootScope);
         $rootScope.$digest();
-        expect(element.children(0).attr('clip-path')).toBe('url(http://google.com/logo.svg)');
+        expect(element.children(0).attr('clip-path')).toBe('url(http://google.com/logo.svg#clipPath)');
       });
     });
 
@@ -110,11 +110,6 @@ describe('svgAttrs', function() {
         expect(element.children(0).attr('clip-path')).toBe('url(#someHash)');
       });
     });
-
-
-    it('should do nothing with absolute urls of the same origin (regardless of html5Mode)');
-    //Is there ever a case where it would make sense for an app to serve from a different base url?
-    // - Local debugging with remote data/assets
   });
 
   describe('non-html5Mode', function() {
