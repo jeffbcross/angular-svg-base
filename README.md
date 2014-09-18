@@ -5,6 +5,24 @@ This is a set of auto directives to fix SVG attributes that reference fragments
 within the same document via FuncIRI notation (`mask="url(#someFragment)"`) where a base tag is
 present. Blink and gecko incorrectly apply these references to the `base href`.
 
+The attributes that will be automatically rewritten include:
+
+ * clip-path
+ * color-profile
+ * src
+ * cursor
+ * fill
+ * filter
+ * marker
+ * marker-start
+ * marker-mid
+ * marker-end
+ * mask
+ * stroke
+
+The attributes will only be rewritten if the value matches FuncIRI notation
+(i.e. `mask="url(#aMask)"`) and the url contains a hash.
+
 See AngularJS issue [#8934](https://github.com/angular/angular.js/issues/8934).
 
 ## Installation
