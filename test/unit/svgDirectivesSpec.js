@@ -102,6 +102,16 @@ describe('svgAttrs', function() {
     });
 
 
+    it('should do nothing if $sniffer.history is falsy', function() {
+      inject(function($compile, $rootScope, $location, $sniffer) {
+        $sniffer.history = false;
+        var element = $compile('<svg><ellipse clip-path="url(#someHash)"></ellipse></svg>')($rootScope);
+        $rootScope.$digest();
+        expect(element.children(0).attr('clip-path')).toBe('url(#someHash)');
+      });
+    });
+
+
     it('should do nothing with absolute urls of the same origin (regardless of html5Mode)');
     //Is there ever a case where it would make sense for an app to serve from a different base url?
     // - Local debugging with remote data/assets

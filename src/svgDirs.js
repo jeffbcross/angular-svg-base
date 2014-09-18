@@ -19,22 +19,35 @@
     ],
     function(attr) {
       svgDirectives[attr] = [
-          '$rootScope', '$location', '$interpolate', 'urlResolve', 'computeSVGAttrValue', 'svgAttrExpressions',
-          function($rootScope, $location, $interpolate, urlResolve, computeSVGAttrValue, svgAttrExpressions) {
+          '$rootScope',
+          '$location',
+          '$interpolate',
+          '$sniffer',
+          'urlResolve',
+          'computeSVGAttrValue',
+          'svgAttrExpressions',
+          function(
+              $rootScope,
+              $location,
+              $interpolate,
+              $sniffer,
+              urlResolve,
+              computeSVGAttrValue,
+              svgAttrExpressions) {
             return {
               restrict: 'A',
               link: function(scope, element, attrs) {
                 var initialUrl;
-                //TODO: verify whether or not attribute must end with )
-                //TODO: support expressions
-
                 //Only apply to svg elements to avoid unnecessary observing
-                if (!svgAttrExpressions.SVG_ELEMENT.test(element[0] &&
-                    element[0].toString()) || !$location.$$html5) return;
+                //Check that is in html5Mode and that history is supported
+                if ((!svgAttrExpressions.SVG_ELEMENT.test(element[0] &&
+                    element[0].toString())) ||
+                  !$location.$$html5 ||
+                  !$sniffer.history) return;
                 //Assumes no expressions, since svg is unforgiving of xml violations
                 initialUrl = attrs[attr];
                 attrs.$observe(attr, updateValue);
-                if ($location.$$html5) $rootScope.$on('$locationChangeSuccess', updateValue);
+                $rootScope.$on('$locationChangeSuccess', updateValue);
 
                 function updateValue () {
                   var newVal = computeSVGAttrValue(initialUrl);
@@ -61,13 +74,13 @@
       HASH_PART: /#.*/
     }).
     factory('computeSVGAttrValue', [
-                '$location', 'svgAttrExpressions', 'urlResolve',
-        function($location,   svgAttrExpressions,   urlResolve) {
+                '$location', '$sniffer', 'svgAttrExpressions', 'urlResolve',
+        function($location,   $sniffer,   svgAttrExpressions,   urlResolve) {
           return function computeSVGAttrValue(url) {
             var match, fullUrl;
             if (match = svgAttrExpressions.FUNC_URI.exec(url)) {
               //hash in html5Mode, forces to be relative to current url instead of base
-              if (match[1].indexOf('#') === 0 && $location.$$html5) {
+              if (match[1].indexOf('#') === 0) {
                 fullUrl = $location.absUrl().
                   replace(svgAttrExpressions.HASH_PART, '') +
                   match[1];
