@@ -1,11 +1,11 @@
 {
   "name": "angular-svg-base",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "authors": [
     "Jeff Cross <middlefloor@gmail.com>"
   ],
   "description": "Auto directives to automatically rewrite absolute hash URLs for fragment references in SVG elements, to work around <base> side effects in Gecko and Blink.",
-  "main": "./angular-svg-base.js",
+  "main": "src/svgDirs.js",
   "keywords": [
     "angularjs",
     "svg",
@@ -17,7 +17,6 @@
     "node_modules",
     "bower_components",
     "test",
-    "src",
     "karma.conf.js"
   ],
   "devDependencies": {
