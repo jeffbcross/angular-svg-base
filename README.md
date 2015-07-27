@@ -1,6 +1,8 @@
 
 # angular-svg-base
 
+> Note: If you open an issue or PR here, please tweet me at jeffbcross so I will notice it.
+
 This is a set of auto directives to fix SVG attributes that reference fragments
 within the same document via FuncIRI notation (`mask="url(#someFragment)"`) where a base tag is
 present. Blink and gecko incorrectly apply these references to the `base href`.
