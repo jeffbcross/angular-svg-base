@@ -71,7 +71,7 @@
       };
     }]).
     value('svgAttrExpressions', {
-      FUNC_URI: /^url\((.*)\)$/,
+      FUNC_URI: /^url\(["']*(.*?)["']*\)$/,
       SVG_ELEMENT: /SVG[a-zA-Z]*Element/,
       HASH_PART: /#.*/
     }).
