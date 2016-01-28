@@ -92,6 +92,9 @@
                 fullUrl = urlResolve(match[1]);
               }
             }
+            if(typeof fullUrl === 'string') {
+                fullUrl = fullUrl.replace(/\(/g, '\\(').replace(/\)/g, '\\)');
+            }
             return fullUrl ? 'url(' + fullUrl + ')' : null;
           };
         }
