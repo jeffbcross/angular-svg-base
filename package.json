@@ -1,6 +1,6 @@
 {
   "name": "angular-svg-base",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "See AngularJS issue [#8934](https://github.com/angular/angular.js/issues/8934).",
   "main": "src/svgDirs.js",
   "directories": {
